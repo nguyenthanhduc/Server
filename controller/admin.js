@@ -9,6 +9,8 @@ const User = require('../models/user');
 
 exports.IsAdmin = (req,res,next) => {
 	console.log(req);
+	if(req.headers.api_key==null)
+		res.status(402).json({mesage: "You need login before do anything"});
     const Data = jwt_decode(req.headers.api_key);
     console.log(Data.role);
     if(Data.role=='admin')

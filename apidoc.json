@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "API document for assignment 7",
+    "description": "API document for FINAL PROJECT",
     "version": "1.0.0",
     "title": "API document",
     "contact": {
@@ -379,6 +379,39 @@
           }
         ]
       }
+    },
+    "/payment/get-data": {
+      "get": {
+        "tags": [
+          "User",
+          "Admin"
+        ],
+        "summary": "Get list payment",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Update success!"
+          },
+          "400": {
+            "description": "Invalid price"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Product id not exists"
+          }
+        },
+        "security": [
+            {
+            "api_key": []
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
@@ -450,6 +483,24 @@
       },
       "xml": {
         "name": "Pet"
+      }
+    },
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "customerid": {
+          "type": "string"
+        },
+        "paymentid": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string"
+        }
       }
     }
   }

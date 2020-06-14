@@ -26,10 +26,10 @@ exports.createpayment = async (req,res) => {
 }
 
 exports.getpayment = async (req,res) => {
-    console.log("OK");
     try 
     {
-        res.json("OK");
+        const payment = await Payment.find();
+        res.json(payment);
     } 
     catch (err) {
         res.json({ message: err })
