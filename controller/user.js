@@ -61,7 +61,7 @@ exports.login = (req,res) => {
 				})
 				res.send(token);
 			}else{
-				res.status(400).json({error: "Wrong password"})
+				res.json({error: "Wrong password"})
 			}
 		}else{
 			res.json({error: "User does not exist"})
