@@ -5,14 +5,19 @@ const cors = require('cors');
 const Payment = require('../models/payment');
 
 exports.createpayment = async (req,res) => {
-
 	const today = new Date();
-	const {customerid , paymentid, date, total} = req.body;
+	const {customerid , paymentid, fullname, gmail, phone, address, more, cart, date, total} = req.body;
 	console.log(req.body);
     const payment = new Payment(
         {
             customerid:customerid,
             paymentid: paymentid,
+            fullname: fullname,
+            gmail: gmail,
+            phone: phone,
+            address: address,
+            more: more,
+            cart: cart,
             date:today,
             total:total
         }

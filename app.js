@@ -7,11 +7,9 @@ var mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const cors = require('cors')
 require('dotenv/config');
-
 //API documentation
 const swaggerUi=require('swagger-ui-express');
 const swaggerDocument = require('./apidoc.json');
-
 // Api docs
 const options = {
     customCss: '.swagger-ui .topbar { display: none }',
@@ -36,6 +34,7 @@ const Contact=require('./routes/contact');
 const User=require('./routes/user');
 const Product=require('./routes/product');
 const Payment=require('./routes/payment');
+
 
 app.use('/contact',Contact);
 app.use('/user',User);
