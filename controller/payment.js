@@ -6,7 +6,7 @@ const Payment = require('../models/payment');
 
 exports.createpayment = async (req,res) => {
 	const today = new Date();
-	const {customerid , paymentid, fullname, gmail, phone, address, more, cart, date, total} = req.body;
+	const {customerid , paymentid, fullname, gmail, phone, address, more, cart, date, total, status} = req.body;
 	console.log(req.body);
     const payment = new Payment(
         {
@@ -19,7 +19,8 @@ exports.createpayment = async (req,res) => {
             more: more,
             cart: cart,
             date:today,
-            total:total
+            total:total,
+            status: status
         }
     );
     console.log(payment);
@@ -38,6 +39,23 @@ exports.getpayment = async (req,res) => {
         res.json(payment);
     } 
     catch (err) {
+        res.json({ message: err })
+    }
+}
+
+exports.updatepayment = async (req, res) => {
+    try {
+        console.log(req.body);
+        const updatePayment = await Payment.updateOne(
+            { paymentid: req.body.paymentid },
+            {
+                $set: {
+                    status: req.body.status
+                }
+            }
+        );
+        res.json(updatePayment);
+    } catch (err) {
         res.json({ message: err })
     }
 }

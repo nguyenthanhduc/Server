@@ -39,6 +39,10 @@ const PaymentSchema = new Schema({
 	total: {
 		type: Number,
 		require: true
+	},
+	status: {
+		type: String,
+		require: true
 	}
 })
 
