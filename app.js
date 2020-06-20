@@ -34,12 +34,13 @@ const Contact=require('./routes/contact');
 const User=require('./routes/user');
 const Product=require('./routes/product');
 const Payment=require('./routes/payment');
-
+const Comment=require('./routes/comment');
 
 app.use('/contact',Contact);
 app.use('/user',User);
 app.use('/product',Product);
 app.use('/payment',Payment);
+app.use('/comment',Comment);
 
 app.use((req,res,next)=>{
     res.status(200).json({

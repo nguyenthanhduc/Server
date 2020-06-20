@@ -22,6 +22,7 @@ exports.createpayment = async (req,res) => {
             total:total
         }
     );
+    console.log(payment);
     try {
         const savePayment = await payment.save();
         res.json(savePayment);
