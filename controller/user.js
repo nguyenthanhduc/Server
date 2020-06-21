@@ -16,7 +16,9 @@ exports.register = (req,res) => {
 		gmail: req.body.gmail,
 		password: req.body.password,
 		created: today,
-		role: 'user'
+		role: 'user',
+		rank: req.body.rank,
+		total: req.body.total
 	};
 	User.findOne({
 		gmail: req.body.gmail
@@ -54,7 +56,9 @@ exports.login = (req,res) => {
 					_id: user._id,
 					full_name: user.full_name,
 					gmail: user.gmail,
-					role: user.role
+					role: user.role,
+					rank: user.rank,
+					total: user.total
 				}
 				let token = jwt.sign(payload, process.env.SECRET_KEY, {
 					expiresIn: 1440
@@ -71,3 +75,50 @@ exports.login = (req,res) => {
 		res.send('error: ' + err)
 	})
 };
+
+exports.getUserDetail = async(req,res)=>{
+	try 
+    {
+    	console.log(req.body);
+		const user= await User.findById(req.body.customerid);
+		if (!user) res.json({error: "User does not exist"})
+		else{
+			res.send(user);
+		}
+		console.log(user);
+    } 
+    catch (err) {
+        res.json({ message: err })
+    }
+}
+
+exports.updateUserrank = async (req, res) => {
+	if(req.body.userid!=''){
+		const user= await User.findById(req.body.userid);
+		console.log(user);
+	    var total = user.total + req.body.total;
+	    var rank = user.rank;
+	    if(rank=="bronze"&&total>=500000){
+	    	rank="silver";
+	    	total = total - 500000;
+	    }
+	    else if(rank=="silver"&&total>=5000000){
+	    	rank = "gold";
+	    	total = total - 5000000;
+	    }
+	    else if(rank=="gold"&&total>=10000000){
+	    	rank=="diamond";
+	    	total = total - 10000000;
+	    }
+	    const updateUser = await User.updateOne(
+	        { _id: req.body.userid },
+	        {
+	            $set: {
+	                rank: rank,
+	                total: total
+	            }
+	        }
+	    );
+	    res.json(updateUser);
+	}
+}

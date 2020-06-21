@@ -5,11 +5,12 @@ const cors = require('cors');
 const Comment = require('../models/comment');
 
 exports.createcomment = async (req,res) => {
-	const {customerid , productid, newcomment} = req.body;
+	const {customerid ,full_name, productid, newcomment} = req.body;
 	console.log(req.body);
     const comment = new Comment(
         {
             customerid: customerid,
+            full_name: full_name,
             productid: productid,
             comment: newcomment
         }

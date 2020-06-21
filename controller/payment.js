@@ -7,7 +7,6 @@ const Payment = require('../models/payment');
 exports.createpayment = async (req,res) => {
 	const today = new Date();
 	const {customerid , paymentid, fullname, gmail, phone, address, more, cart, date, total, status} = req.body;
-	console.log(req.body);
     const payment = new Payment(
         {
             customerid:customerid,
@@ -23,7 +22,6 @@ exports.createpayment = async (req,res) => {
             status: status
         }
     );
-    console.log(payment);
     try {
         const savePayment = await payment.save();
         res.json(savePayment);
@@ -45,7 +43,6 @@ exports.getpayment = async (req,res) => {
 
 exports.updatepayment = async (req, res) => {
     try {
-        console.log(req.body);
         const updatePayment = await Payment.updateOne(
             { paymentid: req.body.paymentid },
             {
@@ -56,6 +53,22 @@ exports.updatepayment = async (req, res) => {
         );
         res.json(updatePayment);
     } catch (err) {
+        res.json({ message: err })
+    }
+}
+
+exports.getpaymentdetail = async(req,res)=>{
+    try 
+    {
+        console.log(req.body);
+        const payment= await Payment.findById(req.body.paymentid);
+        if (!payment) res.json({error: "Payment does not exist"})
+        else{
+            res.send(payment);
+        }
+        console.log(payment);
+    } 
+    catch (err) {
         res.json({ message: err })
     }
 }

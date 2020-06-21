@@ -20,6 +20,14 @@ const UserSchema = new Schema({
 	role: {
 		type: String,
 		require: true
+	},
+	rank: {
+		type: String,
+		require: true
+	},
+	total: {
+		type: Number,
+		require: true
 	}
 })
 

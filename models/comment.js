@@ -6,6 +6,10 @@ const CommentSchema = new Schema({
 		type: String,
 		require: true
 	},
+	full_name:{
+		type: String,
+		require: true
+	},
 	productid: {
 		type: String,
 		require: true

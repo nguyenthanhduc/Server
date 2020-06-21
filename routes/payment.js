@@ -3,9 +3,9 @@ const router = express.Router();
 const payment = require('../controller/payment');
 const jwt_decode = require('jwt-decode')
 
+router.post('/',payment.getpaymentdetail);
 router.post('/insert',payment.createpayment);
 router.get('/get-data',payment.getpayment);
 router.patch('/update',payment.updatepayment);
-
 module.exports=router;
 
