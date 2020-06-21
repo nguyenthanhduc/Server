@@ -93,6 +93,7 @@ exports.getUserDetail = async(req,res)=>{
 }
 
 exports.updateUserrank = async (req, res) => {
+	console.log(req.body);
 	if(req.body.userid!=''){
 		const user= await User.findById(req.body.userid);
 		console.log(user);
